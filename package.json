@@ -1,0 +1,12 @@
+{
+  "name": "litvm-aura-staking-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "ethers": "^6.15.0"
+  }
+}
