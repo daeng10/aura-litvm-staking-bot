@@ -3,6 +3,10 @@ name: AURA Staking 1 Minute
 on:
   workflow_dispatch:
 
+concurrency:
+  group: aura-staking
+  cancel-in-progress: false
+
 jobs:
   staking:
     runs-on: ubuntu-latest
@@ -34,8 +38,10 @@ jobs:
 
             node bot.js
 
+            STATUS=$?
+
             echo ""
-            echo "Bot selesai."
+            echo "Bot selesai dengan exit code: $STATUS"
             echo "Menunggu 60 detik..."
             sleep 60
           done
