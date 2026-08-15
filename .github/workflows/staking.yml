@@ -1,4 +1,4 @@
-name: AURA Staking Test
+name: AURA Staking 1 Minute
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
 jobs:
   staking:
     runs-on: ubuntu-latest
+    timeout-minutes: 350
 
     steps:
       - name: Checkout repository
@@ -19,8 +20,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run staking bot
-        run: node bot.js
+      - name: Run AURA staking every 60 seconds
         env:
           RPC_URL: ${{ secrets.RPC_URL }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          while true
+          do
+            echo "========================================"
+            echo "Starting AURA staking attempt"
+            echo "Time: $(date -u)"
+            echo "========================================"
+
+            node bot.js
+
+            echo ""
+            echo "Bot selesai."
+            echo "Menunggu 60 detik..."
+            sleep 60
+          done
